@@ -25,7 +25,7 @@ New-AzureADGroup -DisplayName "Varonis Assignment Group" -MailEnabled $false -Se
 $ArrayofAzureADUsers = @()
 
 #initiates a for loop that creates Test User 0 - 19
-for($i = 0; $i -lt 20; $i++) {
+for($i = 0; $i -lt 2; $i++) {
 
     #creates a new PasswordProfile object
     $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
@@ -52,14 +52,26 @@ foreach($AzureADUser in $ArrayofAzureADUsers) {
     #stores ObjectId of AzureAD user in variable
     $AzureADUser_ObjectId = $AzureADUser.ObjectId
 
+    #tries to add the user to the group
     try {
 
         #adds the AzureAD member to the group one at a time
         Add-AzureADGroupMember -ObjectId $AzureADGroup -RefObjectId $AzureADUser_ObjectId
     }
 
+    #catches any errors from try statement; sets $err to true
     catch {
-        "An error occured."
+        $err = $true
+    }
+
+    #if err is true, result is stored as FAIL
+    if($err -eq $true) {
+        $Result = "FAIL"
+    }
+
+    #else if err is false, result is stored as SUCCESS
+    else {
+        $Result = "SUCCESS"
     }
 
     #stores the timestamp of when this script is running
@@ -69,6 +81,6 @@ foreach($AzureADUser in $ArrayofAzureADUsers) {
     $log = ".\test.log"
 
     #creates the log file
-    Add-Content -Path $log -Value "User: $AzureADUser_Username | Time: $timestamp | Result: ?"
+    Add-Content -Path $log -Value "Adding $AzureADUser_Username | Time: $timestamp | Result: $Result"
 
 }
