@@ -15,6 +15,7 @@ function New-SecurePassword(){
 #checks to see if the Varonis Assignment Group exists
 $GroupExists = (Get-AzureADGroup -SearchString "Varonis Assignment Group")
 
+# if exists...
 if(!$GroupExists) {
 
     #creates the Varonis Assignment Group
@@ -22,6 +23,7 @@ if(!$GroupExists) {
 
 }
 
+# if not exists...
 else {
     Write-Warning "Found a duplicate group name; skipping group creation..."
 }
