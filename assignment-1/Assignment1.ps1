@@ -18,8 +18,8 @@ New-SecurePassword
 #creates the Varonis Assignment Group
 New-AzureADGroup -DisplayName "Varonis Assignment Group" -MailEnabled $false -SecurityEnabled $true -MailNickName "NotSet"
 
-#gets the objectid of the group
-[String]$AzureADGroup = (Get-AzureADGroup -SearchString "Varonis Assignment Group").ObjectId
+#gets the PSObject of the group
+$AzureADGroup = (Get-AzureADGroup -SearchString "Varonis Assignment Group")
 
 #initializes an empty array
 $ArrayofAzureADUsers = @()
@@ -36,27 +36,21 @@ for($i = 0; $i -lt 2; $i++) {
     #creates the AzureAD User
     New-AzureADUser -DisplayName "Test User $i" -PasswordProfile $PasswordProfile -UserPrincipalName "testuser$i@m1992wgmail.onmicrosoft.com" -AccountEnabled $true -MailNickName "testuser$i"
 
-    #gets the object ID of the user
+    #gets the PSObject of the user
     $AzureADUser = (Get-AzureADUser -ObjectId "testuser$i@m1992wgmail.onmicrosoft.com")
 
-    #adds the ObjectId to the array
+    #adds the user PSObject to the array
     $ArrayofAzureADUsers += $AzureADUser
 
 }
 
 foreach($AzureADUser in $ArrayofAzureADUsers) {
 
-    #stores UPN of AzureAD user in variable
-    $AzureADUser_Username = $AzureADUser.UserPrincipalName
-
-    #stores ObjectId of AzureAD user in variable
-    $AzureADUser_ObjectId = $AzureADUser.ObjectId
-
     #tries to add the user to the group
     try {
 
         #adds the AzureAD member to the group one at a time
-        Add-AzureADGroupMember -ObjectId $AzureADGroup -RefObjectId $AzureADUser_ObjectId
+        Add-AzureADGroupMember -ObjectId $AzureADGroup.ObjectId -RefObjectId $AzureADUser.ObjectId
     }
 
     #catches any errors from try statement; sets $err to true
@@ -81,6 +75,6 @@ foreach($AzureADUser in $ArrayofAzureADUsers) {
     $log = ".\test.log"
 
     #creates the log file
-    Add-Content -Path $log -Value "Adding $AzureADUser_Username | Time: $timestamp | Result: $Result"
+    Add-Content -Path $log -Value "Adding $($AzureADUser.UserPrincipalName) to $($AzureADGroup.DisplayName) | Time: $timestamp | Result: $Result"
 
 }
