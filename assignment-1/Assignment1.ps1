@@ -87,6 +87,6 @@ foreach($AzureADUser in $ArrayofAzureADUsers) {
     $log = ".\test.log"
 
     #creates the log file
-    Add-Content -Path $log -Value "Adding $($AzureADUser.UserPrincipalName) to $($AzureADGroup.DisplayName) | Time: $timestamp | Result: $Result"
+    Add-Content -Path $log -Value "Adding $($AzureADUser.MailNickName) to $($AzureADGroup.DisplayName) | Time: $timestamp | Result: $Result"
 
 }
