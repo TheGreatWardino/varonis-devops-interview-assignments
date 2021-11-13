@@ -44,7 +44,6 @@ for($i = 0; $i -lt 2; $i++) {
     #stores the randomly generated string as a password 
     $PasswordProfile.Password = $SecurePass
 
-    #creates the AzureAD User
     New-AzureADUser -DisplayName "Test User $i" -PasswordProfile $PasswordProfile -UserPrincipalName "testuser$i@m1992wgmail.onmicrosoft.com" -AccountEnabled $true -MailNickName "testuser$i"
 
     #gets the PSObject of the user
@@ -54,6 +53,9 @@ for($i = 0; $i -lt 2; $i++) {
     $ArrayofAzureADUsers += $AzureADUser
 
 }
+
+#location of log file
+$logfile = ".\Assignment1.log"
 
 foreach($AzureADUser in $ArrayofAzureADUsers) {
 
@@ -83,10 +85,7 @@ foreach($AzureADUser in $ArrayofAzureADUsers) {
     #stores the timestamp of when this script is running
     $timestamp = Get-Date -UFormat "%Y-%m-%d-%R"
 
-    #location of log file
-    $log = ".\test.log"
-
     #creates the log file
-    Add-Content -Path $log -Value "Adding $($AzureADUser.MailNickName) to $($AzureADGroup.DisplayName) | Time: $timestamp | Result: $Result"
+    Add-Content -Path $logfile -Value "Adding $($AzureADUser.MailNickName) to $($AzureADGroup.DisplayName) | Time: $timestamp | Result: $Result"
 
 }
