@@ -15,8 +15,19 @@ function New-SecurePassword(){
 #generates secure password
 New-SecurePassword
 
-#creates the Varonis Assignment Group
-New-AzureADGroup -DisplayName "Varonis Assignment Group" -MailEnabled $false -SecurityEnabled $true -MailNickName "NotSet"
+#checks to see if the Varonis Assignment Group exists
+$GroupExists = (Get-AzureADGroup -SearchString "Varonis Assignment Group")
+
+if(!$GroupExists) {
+
+    #creates the Varonis Assignment Group
+    New-AzureADGroup -DisplayName "Varonis Assignment Group" -MailEnabled $false -SecurityEnabled $true -MailNickName "NotSet"
+
+}
+
+else {
+    Write-Warning "Found a duplicate group name; skipping group creation..."
+}
 
 #gets the PSObject of the group
 $AzureADGroup = (Get-AzureADGroup -SearchString "Varonis Assignment Group")
@@ -51,6 +62,7 @@ foreach($AzureADUser in $ArrayofAzureADUsers) {
 
         #adds the AzureAD member to the group one at a time
         Add-AzureADGroupMember -ObjectId $AzureADGroup.ObjectId -RefObjectId $AzureADUser.ObjectId
+        
     }
 
     #catches any errors from try statement; sets $err to true
