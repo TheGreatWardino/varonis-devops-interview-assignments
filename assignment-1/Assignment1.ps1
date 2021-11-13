@@ -44,6 +44,7 @@ for($i = 0; $i -lt 20; $i++) {
     #stores the randomly generated string as a password 
     $PasswordProfile.Password = $SecurePass
 
+    #creates the AzureAD user
     New-AzureADUser -DisplayName "Test User $i" -PasswordProfile $PasswordProfile -UserPrincipalName "testuser$i@m1992wgmail.onmicrosoft.com" -AccountEnabled $true -MailNickName "testuser$i"
 
     #gets the PSObject of the user
@@ -59,27 +60,23 @@ $logfile = ".\Assignment1.log"
 
 foreach($AzureADUser in $ArrayofAzureADUsers) {
 
-    #tries to add the user to the group
-    try {
+    #by default, the $Result will be a success, unless an error is thrown
+    $Result = "SUCCESS"
 
+    #attempts to add the user to the group
+    try {
         #adds the AzureAD member to the group one at a time
         Add-AzureADGroupMember -ObjectId $AzureADGroup.ObjectId -RefObjectId $AzureADUser.ObjectId
-        
     }
 
-    #catches any errors from try statement; sets $err to true
+    #catches any errors from try statement; if an error is caught, sets $Result to FAIL
     catch {
-        $err = $true
-    }
-
-    #if err is true, result is stored as FAIL
-    if($err -eq $true) {
         $Result = "FAIL"
     }
 
-    #else if err is false, result is stored as SUCCESS
-    else {
-        $Result = "SUCCESS"
+    #cleans up Error variable
+    finally {
+        $Error.Clear()
     }
 
     #stores the timestamp of when this script is running
