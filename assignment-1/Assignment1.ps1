@@ -12,9 +12,6 @@ function New-SecurePassword(){
 
 }
 
-#generates secure password
-New-SecurePassword
-
 #checks to see if the Varonis Assignment Group exists
 $GroupExists = (Get-AzureADGroup -SearchString "Varonis Assignment Group")
 
@@ -37,6 +34,9 @@ $ArrayofAzureADUsers = @()
 
 #initiates a for loop that creates Test User 0 - 19
 for($i = 0; $i -lt 2; $i++) {
+
+    #generates secure password
+    New-SecurePassword
 
     #creates a new PasswordProfile object
     $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
