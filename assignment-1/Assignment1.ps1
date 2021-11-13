@@ -33,7 +33,7 @@ $AzureADGroup = (Get-AzureADGroup -SearchString "Varonis Assignment Group")
 $ArrayofAzureADUsers = @()
 
 #initiates a for loop that creates Test User 0 - 19
-for($i = 0; $i -lt 2; $i++) {
+for($i = 0; $i -lt 20; $i++) {
 
     #generates secure password
     New-SecurePassword
