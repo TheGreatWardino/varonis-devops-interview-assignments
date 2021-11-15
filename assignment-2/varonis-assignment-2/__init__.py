@@ -32,7 +32,7 @@ def secret():
 
     credential = DefaultAzureCredential()
     client = SecretClient(
-        vault_url="https://{name}.vault.azure.net/",
+        vault_url=f"https://{name}.vault.azure.net",
         credential=credential
     )
     secret = client.get_secret("VaronisAssignmentSecret")
