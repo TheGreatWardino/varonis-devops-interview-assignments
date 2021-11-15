@@ -19,7 +19,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     if name:
         check_secret()
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully. Your password is {secret.value}")
+        return func.HttpResponse(f"Hello! This HTTP triggered function executed successfully. \n Key Vault name: {name} \n Key Vault secret name: {secret.name} \n Secret creation date: {secret.properties.created_on} \n Key vault secret value: {secret.value}")
     else:
         return func.HttpResponse(
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
