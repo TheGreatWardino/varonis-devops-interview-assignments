@@ -29,3 +29,12 @@
         - Azure portal > Key Vault > `VaronisAssignmentKv$num` > Secrets > `VaronisAssignmentSecret` > Current version > Secret identifier (copy these values to a temporary file)
         - Azure portal > Function app > Settings > Configuration
             - `+ New application setting` > Name: `VaronisAssignmentKv$num` > Value: `@Microsoft.KeyVault(SecretUri=<secret-identifier-value-from-VaronisAssignmentKv$num)` > Save
+
+---
+
+## Assignment 3:
+
+### Separate Github repos:
+- Application Code repo for Assignment 3: https://github.com/TheGreatWardino/varonis-devops-interview-assignment-3-app
+- YAML File(s) repo for Assignment 3: https://github.com/TheGreatWardino/varonis-devops-interview-assignment-3-yaml
+
