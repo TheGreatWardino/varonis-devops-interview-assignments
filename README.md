@@ -50,8 +50,8 @@
                 - `varonis-assignment-4-eastus-vm-0`
                 - `varonis-assignment-4-eastus-vm-1`
         - `load-balancer`: `varonis-assignment-4-eastus`
-			- `load-balancer-rule`: `varnos-assignment-4-eastus`
-			- `load-balancer-probe`: `varnos-assignment-4-eastus`
+			- `load-balancer-rule`: `varonis-assignment-4-eastus`
+			- `load-balancer-probe`: `varonis-assignment-4-eastus`
             - `backend-pools`: `varonis-assignment-4-eastus`
                 - `virtual-machines`:
                     - `varonis-assignment-4-eastus-vm-0`
@@ -60,8 +60,8 @@
         - `traffic-manager-profile`: `varonis-assignment-4-eastus`
             - `traffic_routing_method`: `Performance` - traffic is routed via the User's closest Endpoint (https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/traffic_manager_profile#Performance)
             - `traffic-manager-endpoints`:
-                - `varnos-assignment-4-eastus`
-                - `varnos-assignment-4-northeurope`
+                - `varonis-assignment-4-eastus`
+                - `varonis-assignment-4-northeurope`
         - `virtual-network`: `varonis-assignment-4-eastus`
             - `network-interfaces`:
                 - `varonis-assignment-4-eastus-ni-0`
@@ -78,8 +78,8 @@
                 - `varonis-assignment-4-northeurope-vm-0`
                 - `varonis-assignment-4-northeurope-vm-1`
         - `load-balancer`: `varonis-assignment-4-northeurope`
-			- `load-balancer-rule`: `varnos-assignment-4-northeurope`
-			- `load-balancer-probe`: `varnos-assignment-4-northeurope`
+			- `load-balancer-rule`: `varonis-assignment-4-northeurope`
+			- `load-balancer-probe`: `varonis-assignment-4-northeurope`
             - `backend-pools`: `varonis-assignment-4-northeurope`
                 - `virtual-machines`:
                     - `varonis-assignment-4-northeurope-vm-0`
