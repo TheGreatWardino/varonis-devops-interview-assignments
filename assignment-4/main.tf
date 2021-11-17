@@ -1,3 +1,4 @@
+#Locks us in at the particular hashicorp/azurerm provider version
 terraform {
   required_providers {
     azurerm = {
@@ -7,6 +8,7 @@ terraform {
   }
 }
 
+#states the provider we are using as well as the necessary subscription_id and tenant_id
 provider "azurerm" {
   features {}
   subscription_id = "c8cc589f-47cc-49a4-929e-6dd729ef4dd2"
