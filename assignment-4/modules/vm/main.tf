@@ -10,7 +10,7 @@
  }
 
   resource "azurerm_availability_set" "avset" {
-   name                         = "avset"
+   name                         = var.az_rg_name
    location                     = var.az_rg_location
    resource_group_name          = var.az_rg_name
    platform_fault_domain_count  = 2
