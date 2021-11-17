@@ -9,21 +9,22 @@ terraform {
 
 provider "azurerm" {
   features {}
-
   subscription_id = "c8cc589f-47cc-49a4-929e-6dd729ef4dd2"
   tenant_id = "a00bd783-ae68-4960-b694-bf4b59a40f10"
 }
 
-# Create a resource group
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
+module "resource_group" {
+  source = "./modules/resource_group"
+
+  resource_group_name = "varonis-assignment-4"
+  resource_group_location = "eastus"
+  
 }
 
-# Create a virtual network within the resource group
-resource "azurerm_virtual_network" "example" {
-  name                = "example-network"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
-  address_space       = ["10.0.0.0/16"]
+
+module "network" {
+  source = "./modules/network"
+
+  az_rg_name = module.resource_group.az_rg.name
+  az_rg_location = module.resource_group.az_rg.location
 }
