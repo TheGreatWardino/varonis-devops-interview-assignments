@@ -55,6 +55,16 @@ resource "azurerm_network_interface_backend_address_pool_association" "ni_backen
   backend_address_pool_id = azurerm_lb_backend_address_pool.lb_backend.id
 }
 
+resource "azurerm_traffic_manager_endpoint" "main" {
+  name                = var.az_rg_name
+  resource_group_name = var.az_trf_man_profile
+  profile_name        = var.az_trf_man_profile
+  target              = azurerm_public_ip.address.ip_address
+  type                = "externalEndpoints"
+  weight              = 100
+  endpoint_location = var.az_rg_location
+}
+
 output "az_ni" {
   value = azurerm_network_interface.main
 }

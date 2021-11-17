@@ -5,3 +5,5 @@ variable "az_rg_name" {
 variable "az_rg_location" {
   type = string
 }
+
+variable "az_trf_man_profile" {}

@@ -18,7 +18,6 @@ module "resource_group_eastus" {
 
   resource_group_name = var.resource_group_name
   resource_group_location = "eastus"
-  
 }
 
 module "network_eastus" {
@@ -26,6 +25,7 @@ module "network_eastus" {
 
   az_rg_name = module.resource_group_eastus.az_rg.name
   az_rg_location = module.resource_group_eastus.az_rg.location
+  az_trf_man_profile = module.traffic.az_trf_man_profile.name
 }
 
 module "vm_eastus" {
@@ -34,7 +34,6 @@ module "vm_eastus" {
   az_ni = module.network_eastus.az_ni
   az_rg_name = module.resource_group_eastus.az_rg.name
   az_rg_location = module.resource_group_eastus.az_rg.location
-
 }
 
 module "resource_group_northeurope" {
@@ -42,7 +41,6 @@ module "resource_group_northeurope" {
 
   resource_group_name = var.resource_group_name
   resource_group_location = "northeurope"
-  
 }
 
 module "network_northeurope" {
@@ -50,6 +48,7 @@ module "network_northeurope" {
 
   az_rg_name = module.resource_group_northeurope.az_rg.name
   az_rg_location = module.resource_group_northeurope.az_rg.location
+  az_trf_man_profile = module.traffic.az_trf_man_profile.name
 }
 
 module "vm_northeurope" {
@@ -58,5 +57,11 @@ module "vm_northeurope" {
   az_ni = module.network_northeurope.az_ni
   az_rg_name = module.resource_group_northeurope.az_rg.name
   az_rg_location = module.resource_group_northeurope.az_rg.location
+}
 
+module "traffic" {
+  source = "./modules/traffic"
+
+  az_rg_name = module.resource_group_eastus.az_rg.name
+  
 }

@@ -6,6 +6,4 @@ variable "az_rg_location" {
   type = string
 }
 
-variable "az_ni" {
-  #type = string
-}
+variable "az_ni" {}
