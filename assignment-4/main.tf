@@ -28,3 +28,12 @@ module "network" {
   az_rg_name = module.resource_group.az_rg.name
   az_rg_location = module.resource_group.az_rg.location
 }
+
+module "vm" {
+  source = "./modules/vm"
+
+  az_ni = module.network.az_ni
+  az_rg_name = module.resource_group.az_rg.name
+  az_rg_location = module.resource_group.az_rg.location
+
+}
