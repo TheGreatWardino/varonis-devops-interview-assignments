@@ -44,7 +44,7 @@
 - Terraform Modules:
     - `resource_group_eastus`
         - `source`= references a common module; this will create our location-specific `resource_group`
-        - `resource_group_name`= assigns the value from terraform.auto.tfvars as this variable
+        - `resource_group_name`= assigns the value from `terraform.auto.tfvars` as this variable
         - `resource_group_location` = declares the location to use for this resource group (`eastus`)
     - `network_eastus`
         - `source`= references a common module; this will create our location-specific `network` infrastructure
