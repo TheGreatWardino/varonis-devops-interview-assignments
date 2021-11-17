@@ -16,7 +16,7 @@ provider "azurerm" {
 module "resource_group_eastus" {
   source = "./modules/resource_group"
 
-  resource_group_name = "varonis-assignment-4"
+  resource_group_name = var.resource_group_name
   resource_group_location = "eastus"
   
 }
@@ -40,7 +40,7 @@ module "vm_eastus" {
 module "resource_group_northeurope" {
   source = "./modules/resource_group"
 
-  resource_group_name = "varonis-assignment-4"
+  resource_group_name = var.resource_group_name
   resource_group_location = "northeurope"
   
 }
