@@ -58,7 +58,7 @@
         - `az_rg_location` = location of the Azurerm Resource Group; this is referencing the output generated in `module:resource_group_eastus`
     - `resource_group_northeurope`
         - `source`= references a common module; this will create our location-specific `resource_group`
-        - `resource_group_name`= assigns the value from terraform.auto.tfvars as this variable
+        - `resource_group_name`= assigns the value from `terraform.auto.tfvars` as this variable
         - `resource_group_location` = declares the location to use for this resource group (`northeurope`)
     - `network_northeurope`
         - `source`= references a common module; this will create our location-specific `network` infrastructure
