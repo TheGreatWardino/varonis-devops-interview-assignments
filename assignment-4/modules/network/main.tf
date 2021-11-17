@@ -30,6 +30,17 @@ resource "azurerm_lb" "load_balancer" {
   }
 }
 
+resource "azurerm_lb_rule" "lb_rule" {
+  resource_group_name            = var.az_rg_name
+  loadbalancer_id                = azurerm_lb.load_balancer.id
+  name                           = var.az_rg_name
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = var.az_rg_name
+  backend_address_pool_id = azurerm_lb_backend_address_pool.lb_backend.id
+}
+
  resource "azurerm_lb_backend_address_pool" "lb_backend" {
    loadbalancer_id     = azurerm_lb.load_balancer.id
    name                = var.az_rg_name
