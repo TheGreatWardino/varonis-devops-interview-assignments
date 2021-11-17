@@ -39,6 +39,14 @@ resource "azurerm_lb_rule" "lb_rule" {
   backend_port                   = 80
   frontend_ip_configuration_name = var.az_rg_name
   backend_address_pool_id = azurerm_lb_backend_address_pool.lb_backend.id
+  probe_id = azurerm_lb_probe.lb_probe.id
+}
+
+resource "azurerm_lb_probe" "lb_probe" {
+  resource_group_name = var.az_rg_name
+  loadbalancer_id     = azurerm_lb.load_balancer.id
+  name                = var.az_rg_name
+  port                = 80
 }
 
  resource "azurerm_lb_backend_address_pool" "lb_backend" {
